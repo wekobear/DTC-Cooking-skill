@@ -1,0 +1,4 @@
+interface:
+  display_name: "独立站检测"
+  short_description: "快速审核独立站转化、信任、UX 与结账问题"
+  default_prompt: "Use $independent-site-audit 对这个独立站做一次中文快速审核，并输出优先问题清单、证据、责任归属和优化建议。"
