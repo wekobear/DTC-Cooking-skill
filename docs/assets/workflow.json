@@ -1,0 +1,258 @@
+{
+  "schema_version": 2,
+  "diagram_type": "workflow",
+  "meta": {
+    "title": "DTC Cooking · 从看出问题到改好页面",
+    "locale": "zh-CN",
+    "quality_profile": "showcase",
+    "legend": {
+      "mode": "hidden"
+    }
+  },
+  "lanes": [
+    {
+      "id": "connected",
+      "label": "有后台数据"
+    },
+    {
+      "id": "main",
+      "label": "主要流程"
+    },
+    {
+      "id": "documents",
+      "label": "资料与设计"
+    },
+    {
+      "id": "delivery",
+      "label": "修改与上线"
+    }
+  ],
+  "phases": [
+    {
+      "id": "prepare",
+      "label": "01 准备能提供的资料",
+      "fromCol": 0,
+      "toCol": 1
+    },
+    {
+      "id": "diagnose",
+      "label": "02 找问题，讲清怎么改",
+      "fromCol": 2,
+      "toCol": 3,
+      "variant": "emphasis"
+    },
+    {
+      "id": "build",
+      "label": "03 做出能看到的页面",
+      "fromCol": 4,
+      "toCol": 5
+    }
+  ],
+  "mainPath": [
+    "brief",
+    "compare",
+    "proposal",
+    "prototype",
+    "edit-choice",
+    "verify",
+    "publish",
+    "observe"
+  ],
+  "nodes": [
+    {
+      "id": "brief",
+      "lane": "main",
+      "col": 0,
+      "type": "external",
+      "label": "发来网站与目标",
+      "sublabel": "想改善哪里？",
+      "width": 164
+    },
+    {
+      "id": "analytics",
+      "lane": "connected",
+      "col": 1,
+      "type": "database",
+      "label": "读取后台数据",
+      "sublabel": "PostHog / GA4 / 订单",
+      "width": 180
+    },
+    {
+      "id": "reports",
+      "lane": "documents",
+      "col": 1,
+      "type": "database",
+      "label": "读取现有资料",
+      "sublabel": "PDF、表格、报告、截图",
+      "width": 180
+    },
+    {
+      "id": "compare",
+      "lane": "main",
+      "col": 2,
+      "type": "backend",
+      "label": "对照网站与标杆",
+      "sublabel": "找出看不懂、不好买的地方",
+      "width": 204
+    },
+    {
+      "id": "proposal",
+      "lane": "main",
+      "col": 3,
+      "type": "backend",
+      "label": "说明先改什么",
+      "sublabel": "问题、理由、截图与改法",
+      "width": 192
+    },
+    {
+      "id": "prototype",
+      "lane": "documents",
+      "col": 3,
+      "type": "frontend",
+      "label": "画出新页面",
+      "sublabel": "Playbook + HeroUI",
+      "width": 178
+    },
+    {
+      "id": "edit-choice",
+      "lane": "documents",
+      "col": 4,
+      "type": "frontend",
+      "label": "选择修改方式",
+      "sublabel": "Figma / pen.dev / HTML",
+      "width": 190
+    },
+    {
+      "id": "verify",
+      "lane": "delivery",
+      "col": 4,
+      "type": "backend",
+      "label": "检查页面能否用",
+      "sublabel": "手机、按钮与购买步骤",
+      "width": 190
+    },
+    {
+      "id": "publish",
+      "lane": "delivery",
+      "col": 5,
+      "type": "cloud",
+      "label": "按发布要求上线",
+      "sublabel": "核对线上页面和改动",
+      "width": 178
+    },
+    {
+      "id": "observe",
+      "lane": "documents",
+      "col": 5,
+      "type": "backend",
+      "label": "看改后的表现",
+      "sublabel": "是否更容易选购与下单",
+      "width": 192
+    }
+  ],
+  "edges": [
+    {
+      "id": "use-backend",
+      "from": "brief",
+      "to": "analytics",
+      "label": "已连接",
+      "role": "branch"
+    },
+    {
+      "id": "use-reports",
+      "from": "brief",
+      "to": "reports",
+      "label": "有文档",
+      "role": "branch"
+    },
+    {
+      "id": "use-reference",
+      "from": "brief",
+      "to": "compare",
+      "label": "都没有：直接看页面",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "backend-to-compare",
+      "from": "analytics",
+      "to": "compare",
+      "role": "branch"
+    },
+    {
+      "id": "reports-to-compare",
+      "from": "reports",
+      "to": "compare",
+      "role": "branch",
+      "fromSide": "right"
+    },
+    {
+      "id": "compare-to-proposal",
+      "from": "compare",
+      "to": "proposal",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "proposal-to-prototype",
+      "from": "proposal",
+      "to": "prototype",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "prototype-to-choice",
+      "from": "prototype",
+      "to": "edit-choice",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "choice-to-verify",
+      "from": "edit-choice",
+      "to": "verify",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "verify-to-publish",
+      "from": "verify",
+      "to": "publish",
+      "role": "main",
+      "variant": "emphasis"
+    },
+    {
+      "id": "publish-to-observe",
+      "from": "publish",
+      "to": "observe",
+      "role": "main",
+      "variant": "emphasis"
+    }
+  ],
+  "cards": [
+    {
+      "dot": "cyan",
+      "title": "开始时问清",
+      "items": [
+        "先查已有连接，再问缺什么资料",
+        "是否让多个 AI 分工协作"
+      ]
+    },
+    {
+      "dot": "violet",
+      "title": "改稿方式自己选",
+      "items": [
+        "用 Figma；没有就推荐 pen.dev",
+        "也可直接拿 HTML 网页交付"
+      ]
+    },
+    {
+      "dot": "emerald",
+      "title": "每一步看得见",
+      "items": [
+        "留下短报告、截图与方案",
+        "没有数据时，效果先列为待验证"
+      ]
+    }
+  ]
+}

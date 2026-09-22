@@ -1,124 +1,78 @@
 # DTC Cooking（DTC 烹饪）
 
-这是一个用于快速审核 DTC / Shopify / 品牌独立站转化问题的 Codex Skill。它把独立站优化当作一门烹饪：先验食材（判断数据是否可信），再尝味道、找是哪个环节走了味（定位漏斗哪里流失），最后按食谱调整火候与调味（输出有证据、有优先级、有责任归属的优化清单）。
+**当前版本：0.3.0** · [下载 Skill](https://github.com/wekobear/DTC-Cooking-skill/releases/download/v0.3.0/independent-site-audit-0.3.0.zip) · [版本说明](CHANGELOG.md)
 
-## 能做什么
+帮助 DTC 独立站找出页面哪里让顾客看不懂、选不定、买不顺，再给出有依据、能实施的改进方案。用户说清目标后，可以从界面检查继续做到页面制作、验证和已授权的上线。
 
-- 快速审核一个独立站首页、落地页、品类页、PDP、购物车和结账路径。
-- 判断问题属于流量质量、落地页承接、首屏表达、商品发现、PDP 决策、购物车、结账、信任、移动端、技术性能还是埋点。
-- 输出 5-10 个优先问题，并标注证据、影响、建议、责任归属和待验证指标。
-- 在有 GA4/GTM/广告/热力图/用户反馈时，做完整 8 阶段转化诊断。
-- 帮助做改版验收：检查 claim、SKU、链接、图片 alt、JSON-LD、移动端、tracking hooks 和远程资源。
+这是给 AI Agent 使用的工作流程，执行需要当前环境提供浏览器、代码或站点编辑能力；发布还需要正确的目标和账号权限。它不承诺自动提高转化率，也不要求每个用户都连接同一套工具。
 
-## 适合什么时候用
-
-- “帮我检测一下这个独立站哪里影响转化。”
-- “这个 Shopify 站首页/PDP/购物车有什么问题？”
-- “我只有一个网址，先快速看 5 个最该改的问题。”
-- “根据 GA4 漏斗和页面证据，帮我定位为什么不转化。”
-- “上线前帮我做一次独立站改版验收。”
-
-## 快速上手
-
-在 Codex 中这样调用：
+## 一句话开始
 
 ```text
-Use $independent-site-audit 检测一下这个网站：https://example.com
+Use $independent-site-audit 检查 https://example.com 的商品页，说明最值得改的问题和方案。
 ```
 
-如果只有网址，Skill 会自动走快速审核模式：
-
-1. 说明没有 GA4、广告、热力图时的判断限制。
-2. 检查首页、品类页、代表性 PDP、购物车入口、结账入口、政策页和移动端。
-3. 输出优先问题清单。
-4. 单独列出需要数据确认的项目。
-
-如果你有数据，可以这样问：
+也可以指定交付终点：
 
 ```text
-Use $independent-site-audit 结合这些 GA4 漏斗数据、广告来源和热力图记录，完整诊断这个独立站转化问题。
+Use $independent-site-audit 根据这个商品页和我提供的 PDF 报告，做出可操作的改版预览。
+Use $independent-site-audit 检查并修改这个页面，验证后发布到项目已配置的网站，给我前后对比和线上检查结果。
 ```
 
-## 输出格式
+只要求检测，就交付问题和方案；要求预览，就制作并验证页面；明确要求上线且条件具备，就继续完成发布与线上核验。普通阶段报告不会变成重复审批。
 
-快速审核默认输出：
+## 没有后台数据，也能开始
 
-```markdown
-## 快速诊断结论
+| 手上有什么 | 怎样做 |
+| --- | --- |
+| 已连接 PostHog、GA4 或商城后台 | 先核对站点和数据是否可用，再结合实际页面解释问题 |
+| PDF、表格、报表、数据文档或截图 | 读取现有资料，注明来源和日期，不强制先接后台 |
+| 只有网址，没有数据 | 实际查看用户页面，与相关跨品类标杆对照，说明建议和理由 |
 
-2-4 句话说明最大转化阻力、主要流失环节、优先动作。
+没有数据时也给出具体方案，但不把推测写成真实流失原因。后续是否提升转化，需要实施后的证据。
 
-## 优先问题清单
+## 从发现问题到交付页面
 
-| 优先级 | 位置 | 问题 | 证据 | 建议 | 责任归属 | 待验证指标 |
-| --- | --- | --- | --- | --- | --- | --- |
-| 🔴 | 首页/PDP/购物车等 | 具体问题 | 页面观察/数据 | 具体改法 | UI/运营/产品/开发/营销 | CTR/ATC/CVR 等 |
+![DTC Cooking 完整流程](docs/assets/workflow.png)
 
-## 待数据确认
+[白话流程说明](docs/workflow.md) · [交互流程图 HTML](docs/workflow.html)（下载后用浏览器打开）
 
-- GA4 漏斗
-- 渠道跳出率
-- 首页到 PDP 点击率
-- PDP 到加购率
-- 购物车到结账流失率
-- 结账退出率
-- 用户反馈/客服问题
-- 竞品变化
-```
+1. 读取网站、目标与已有工具，补问尚缺的数据和是否开启多智能体。
+2. 整理资料，检查实际界面，按问题选择标杆并保存真实截图。
+3. 写“页面改进说明书”（PRD）：哪里有问题、凭什么这样判断、怎么改、如何检查。
+4. 按 [Vibe Designing Playbook](https://alibaba-cloud-design.github.io/vibe-designing-playbook/) 的设计方法，结合 [HeroUI](https://heroui.com/docs/react/getting-started) 制作原型，沿用目标站的品牌与业务规则。
+5. 验证手机和电脑上的实际操作，再按用户要求交付或上线。
 
-## 8 阶段方法论
+每个实际执行的大阶段留下简短报告，问题、证据、改动与验证可以对应起来。开启多智能体时按独立工作分工；关闭时由单个 Agent 完成。
 
-完整诊断按以下顺序执行：
+## 怎样继续修改
 
-1. 数据基础设施检查：GA4、GTM、Pixel、UTM、跨域追踪。
-2. 流量质量与市场差异诊断：渠道、广告承接、SEO 意图、独立站 vs 平台、跨市场设计。
-3. 全漏斗逐级诊断：首页、落地页、跳出率、品类页、PDP、购物车、结账。
-4. 用户反馈体系与信任审计：反馈趋势、场景丰富度、退货、保修、客服、物流、FAQ、官网购买优势。
-5. 视觉与交互体验审计：首页交互、产品教育、排版字号、品牌色、信息密度。
-6. 技术性能检测：LCP、INP、CLS、移动端、图片、关键功能和转化像素。
-7. 系统性问题诊断与协同机制：UI、运营、营销、产品、开发、用户运营责任归属。
-8. 执行节奏与持续迭代：Quick Wins、A/B 测试、竞品监控、每周复盘。
+- **Figma**：先检查插件、登录和目标文件能力，再按选择导入可编辑稿；导入不等于完整组件和交互自动保留。
+- **pen.dev**：没有 Figma、但想手动调整文字、图片和排版时，推荐 [pen.dev 客户端](https://www.pen.dev/)。修改并导出后重新验证页面。
+- **HTML + Tailwind CSS**：直接交付页面与预览；购买功能和数据接入按项目实际情况实现。
 
-## 文件结构
+HeroUI、Figma 和分析工具的安装状态不会从作者电脑继承。Skill 会按当前环境检查，缺少工具时继续不依赖它的工作。
 
-```text
-independent-site-audit/
-├── SKILL.md
-├── agents/
-│   └── openai.yaml
-├── references/
-│   ├── quick-audit-zh.md
-│   ├── conversion-methodology-zh.md
-│   ├── audit-checklist-zh.md
-│   ├── report-template-zh.md
-│   ├── audit-checklist.md
-│   └── report-template.md
-└── scripts/
-    └── static_site_audit.py
-```
+## 安装
 
-## 本地静态检查脚本
+下载并解压 [0.3.0 Skill 包](https://github.com/wekobear/DTC-Cooking-skill/releases/download/v0.3.0/independent-site-audit-0.3.0.zip)，将其中的 `independent-site-audit/` 放入工具支持的 Skill 目录，即可通过 `$independent-site-audit` 调用。已有中央 Skill 管理器时沿用其目录与软链接规则，不创建重复副本。
 
-`scripts/static_site_audit.py` 可用于本地 HTML/CSS/JS 页面验收，例如：
+仓库中的 `independent-site-audit/` 是可安装目录；`docs/` 是流程说明和图，`independent-site-audit/tests/` 是静态检查脚本的验证用例。
+
+## 本地静态检查
 
 ```bash
 python3 independent-site-audit/scripts/static_site_audit.py index.html \
-  --css styles.css \
-  --js script.js \
-  --required-id main \
-  --min-product-links 6 \
-  --require-tracking \
-  --require-mobile-css
+  --css styles.css --js script.js --required-id main \
+  --require-tracking --require-mobile-css
 ```
 
-脚本会检查标题、meta description、viewport、H1、图片 alt、链接、JSON-LD、required id/text、forbidden text、产品链接数量、tracking hooks 和移动端 CSS。
+脚本检查 HTML 和资源中的静态线索，不能证明按钮能用、页面响应式正确、分析端收到事件或生产发布成功。实际任务仍需浏览器与发布后的检查。
 
-## 安装到 Codex
+## 发布内容与隐私
 
-将 `independent-site-audit/` 放到 Codex skills 目录后即可通过 `$independent-site-audit` 调用。常见位置是：
+公共包只包含通用 Skill、参考方法和静态检查脚本；流程图可单独下载。项目报表、客户截图、私人文档地址、本机路径、连接配置和安全扫描原始记录不随包发布。标杆池使用公开品牌入口，用户可替换为自己的资料。
 
-```text
-~/.codex/skills/independent-site-audit
-```
+当前发布验证覆盖 Skill 结构、静态脚本用例、流程分支审阅和流程图。尚未宣称已在所有商城平台完成真实发布验证。
 
-如果只是想查看或复用方法论，也可以直接阅读 `references/quick-audit-zh.md` 和 `references/conversion-methodology-zh.md`。
+交互图使用 Archify 生成，第三方许可见 [THIRD_PARTY_NOTICES.md](THIRD_PARTY_NOTICES.md)。

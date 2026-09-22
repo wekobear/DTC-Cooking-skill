@@ -1,124 +1,75 @@
 ---
 name: independent-site-audit
-description: Audit independent ecommerce/DTC sites and Shopify-style brand sites for conversion, trust, UX, traffic quality, landing pages, cart/checkout, cross-market design fit, user feedback, competitor monitoring, content claims, mobile readiness, analytics hooks, technical performance, and launch acceptance. Use when asked to do 独立站检测, 独立站快速审核, 独立站诊断, 网站分析, 网站体检, 首页/PDP审计, 转化率诊断, 跳出率治理, 落地页审核, 购物车/结账诊断, 增长设计分析, 改版验收, homepage/PDP audit, conversion review, growth diagnosis, redesign QA, or to turn a live/local ecommerce site into a prioritized findings report and verification checklist.
+description: 审核 DTC 独立站的界面、选购与下单体验，结合已连接数据、用户报表或真实页面与标杆对照，给出有证据的改进方案；按用户要求继续制作原型、实现并验证上线。适用于独立站检测、首页或商品页诊断、转化体验优化、改版和上线验收。
+metadata:
+  version: "0.3.0"
 ---
 
-# Independent Site Audit
+# DTC Cooking · 独立站界面优化
 
-## Overview
+帮助用户找出页面哪里让顾客看不懂、选不定、买不顺，并交付有依据、能实施的改法。默认用中文白话解释“哪里有问题、为什么值得改、怎么改、如何检查”；技术细节放在需要它的开发说明中。
 
-Use this skill to inspect an independent ecommerce site end to end: tracking reliability, traffic quality, full-funnel leakage, landing-page fit, homepage/category/PDP/cart/checkout friction, trust claims, user feedback, competitor gaps, cross-market design fit, mobile UX, visual interaction, technical performance, and acceptance readiness.
+## 先确定本次终点
 
-Default to funnel-first, evidence-first work. First locate where users drop off, then use behavior and page evidence to explain why, and only then recommend changes. Separate what is directly observed from what is inferred, and mark assumptions when analytics, ad data, or internal policy docs are missing.
+从用户的一句话和已有上下文识别范围，不要求填完整表单：
 
-中文使用方式：用这个 Skill 做独立站检测时，默认输出中文报告，除非用户明确要求英文或双语。重点不是泛泛点评页面好不好看，而是先用漏斗数据判断“哪里漏”，再用行为证据和页面检查解释“为什么漏”，最后给可执行改法。
+| 用户意图 | 完成到哪里 |
+| --- | --- |
+| 检测、审阅、给方案 | 真实页面取证、问题排序和改进说明书；不自动改站或发布 |
+| 做原型、修改页面、给可运行预览 | 在方案后继续设计、实现和浏览器验证，交付代码及预览 |
+| 做好并上线、发布这些修改 | 在已有授权范围内继续验收、发布、检查生产页面并记录恢复方式 |
 
-## Quick Audit Mode
+只问会改变结果且无法从上下文确认的信息。已有明确上线授权不在阶段切换时反复询问；缺少目标站点、必要业务决定或具体外部操作授权时，只暂停依赖它的部分，继续独立工作。
 
-When the user wants a fast review or only provides a URL/screenshots, run a lightweight audit instead of blocking on full analytics access:
+## 启动与资料路线
 
-1. State data limitations up front.
-2. Inspect homepage, one collection/category page, one representative PDP, cart entry, checkout entry, support/policy pages, and mobile layout.
-3. Use `references/quick-audit-zh.md` for a Chinese rapid pass.
-4. Produce 5-10 prioritized issues with page/element, evidence, why it hurts conversion, suggested fix, owner, and priority.
-5. Add a "needs data confirmation" section for GA4, ads, heatmaps, checkout, and customer feedback items.
+完整页面优化使用以下启动流程。仅截图评议或已明确的局部缺陷修复，可直接处理当前材料与问题；仅在会改变判断时补问数据，不强制开展无关标杆研究。
 
-## Core Workflow
+1. 确认目标 URL 或本地页面、主要购买任务和交付终点。先查看已有项目说明、用户资料和可调用工具。
+2. 检查 PostHog、GA4、商城后台或只读数据库连接：工具可调用、登录有效、项目对应目标站点、相关数据可读取是四件事。不能把“装了插件”写成“有本站数据”。
+3. 对尚未确定的资料，用一次简短询问收集：是否已有 PostHog/GA4 并连接给当前 AI；是否可提供后台数据或现成报表。没有分析连接时建议连接已有分析平台，并按需补充后台业务数据，不要求同时安装两套平台。
+4. 按实际可用资料走下表。任何路线都能开始页面检查；只有目标站点或页面本身无法访问时，才需要补充可读取的页面材料。
 
-1. Define the audit frame and data access.
-   - Capture target URL or local files, market, language, target customer, product category, funnel goal, known constraints, and the user's desired output.
-   - 中文：先确认检测对象、市场/语言、目标用户、品类、核心转化目标、已知约束，以及用户想要报告、清单、改版建议还是验收结果。
-   - Ask for or inspect available analytics: GA4, GTM, ad pixels, UTM rules, heatmaps/session recordings, ad creatives, email/social traffic, and checkout domain setup.
-   - If live facts, prices, policies, competitors, or product details may have changed, browse or otherwise verify current pages before making claims.
-   - If the user provides analytics, ad accounts, heatmaps, or customer support logs, use them as higher-priority evidence than generic best practices.
+| 资料情况 | 执行方式 | 结论边界 |
+| --- | --- | --- |
+| 已连接分析平台或后台 | 读取与当前问题有关的数据，检查口径和缺失，结合页面解释 | 数据异常先说明；订单表不能还原未采集的浏览和放弃行为 |
+| 未连接，但有 PDF、表格、数据文档、报表或截图 | 读取用户材料，核对来源、日期、页面和统计对象 | 引用文件页码或工作表；看不清或缺失的内容不猜测 |
+| 都没有 | 检查用户真实页面，选相关标杆对照并给出明确改法 | 说明是页面观察与待验证假设，不虚构流失人数或转化提升 |
 
-2. Validate data infrastructure before diagnosis.
-   - Confirm core ecommerce events exist and are not duplicated: `page_view`, `view_item`, `add_to_cart`, `begin_checkout`, `purchase`.
-   - Confirm `purchase` is marked as conversion, pixels align across Meta/TikTok/Google Ads, UTM naming is usable, and cross-domain tracking works for Shopify or external checkout.
-   - Build or request a funnel view: `Sessions -> Product Page Views -> Add to Cart -> Begin Checkout -> Purchase`, segmented by device and traffic source.
-   - If tracking is broken, make this a P0 finding and treat downstream conversion conclusions as provisional.
+资料接入、阶段报告、PRD 和发布标准见 [执行流程](references/workflow-execution.md)。只读取当前任务需要的部分。
 
-3. Diagnose traffic quality.
-   - Segment performance by source/medium, campaign, landing page, new vs returning users, and device.
-   - Compare ad promise against landing-page content. Low conversion may be a traffic-intent problem rather than a site UX problem.
-   - Use the decision rule: high bounce by paid traffic suggests ad/landing mismatch; high bounce by organic suggests search-intent mismatch; normal bounce with later leakage requires funnel-stage diagnosis.
+## 是否使用多智能体
 
-4. Diagnose market fit, landing-page fit, and bounce reasons.
-   - Compare independent-site behavior against marketplace behavior. Do not apply Amazon-style standards directly to DTC sites.
-   - Check whether the target market expects a brand-led, breathable, restrained DTC experience or a dense, promotion-heavy marketplace experience.
-   - For paid/social landing pages, compare audience, creative promise, information architecture, visual rhythm, CTA placement, and loading speed.
-   - If bounce is high, identify the channel, likely user concern, and whether the core benefit is unclear. Consider lightweight benefit reinforcement, FAQ, social proof, logistics promise, or official-site advantage.
+完整流程中，用户尚未选择时，询问是否开启多智能体；明确的简单局部任务可由当前助手直接完成。开启后可让资料分析、标杆研究、方案、设计、开发和验收由不同阶段助手处理，主助手统一交付。已有选择直接沿用；关闭时不委派。没有回答先由当前助手做独立检查，不把沉默当作开启。
 
-5. Diagnose the full funnel.
-   - Inspect homepage, key collection/category pages, at least one representative PDP, cart/checkout entry points, policy/support pages, and mobile navigation.
-   - 中文：至少看首页、核心分类页/集合页、代表性商品详情页、购物车入口、政策/售后页、移动端导航。
-   - Record desktop and mobile screenshots when visual QA matters.
-   - Extract product/SKU map, offer claims, warranty/returns/shipping claims, CTAs, navigation paths, forms, tracking hooks, and external assets.
-   - Keep source URLs with every factual claim. Do not invent traffic share, conversion uplift, warranty scope, delivery guarantees, or compliance claims.
-   - Diagnose by stage: homepage first screen/CTA/brand trust/product education, category sorting/filter/product cards, PDP first screen/media/price/proof/CTA/typography/mobile-vs-PC/variants, cart feedback/fees/confidence/GMV formula, checkout guest checkout/forms/payment/errors/shipping transparency.
+开启后为实际执行的大节点安排职责清楚的阶段助手；相互独立的资料和页面研究可并行，有上下游依赖的步骤顺序交接。主助手统一问题编号、证据和版本，核验最终结果。工具不支持委派时说明并继续单助手流程；不为凑角色拆分简单修改。
 
-6. Audit trust, user feedback, competitors, and visual interaction.
-   - Horizontal: compare against category expectations, direct competitors, marketplaces, and high-performing adjacent DTC patterns.
-   - Vertical: inspect the site's own funnel from first impression to product choice to checkout confidence.
-   - 中文：横向看竞品/品类常识/平台心智，纵向看本站从首屏、选品、信任、PDP、加购到结账的完整链路。
-   - Prefer specific bottlenecks over generic advice: choice friction, trust friction, mobile hesitation, PDP uncertainty, offer mismatch, support ambiguity, or tracking blind spots.
-   - Check trust elements: returns, warranty, service channels, logistics, secure payment, reviews, media/KOL proof, UGC, company info, and FAQ.
-   - Use user feedback when available: group complaints by rising trend and usage scenario before turning them into product/design requirements.
-   - Treat competitor monitoring as a recurring mechanism: direct competitors first, then cross-category references when the site is already mature.
-   - Check visual and interaction quality: banner interaction, product education animation, typography hierarchy, button consistency, spacing rhythm, and restrained brand-color use.
+## 执行主线
 
-7. Audit technical performance and critical functions.
-   - Check performance and compatibility when relevant: LCP, INP, CLS, mobile/desktop performance, page weight, image optimization, browser/device support, add-to-cart, discount code, payment, email confirmation, and conversion pixels.
+1. **看真实页面与资料。** 围绕目标任务检查桌面和手机的入口、选购、商品信息、保障说明、购物车与相关结账状态。保存可复现的问题和真实截图。范围小则只检查受影响页面，不机械扩大为整站审计。
+2. **找适合借鉴的标杆。** 从用户指定案例或 [公开标杆池](references/benchmarks.md) 选与问题有关的少量页面。记录实际截图与具体机制，不用品牌名或生成图充当证据。
+3. **写页面改进说明书（PRD）。** 把用户页面、相关数据或文件、标杆截图、推荐改法、取舍和验收动作关联起来。按用户受到的影响、证据和实施成本排序；没有数据也要给具体方案。
+4. **需要改页面时继续制作。** 采用 Vibe Designing Playbook 的规格方法和 HeroUI v3 组件思路，沿用现有站点的业务与技术约束。按需读取 [设计与交付](references/design-and-delivery.md)，运行并检查网页。
+5. **选择编辑方式。** 预览完成后，对尚未确定的偏好询问 Figma、pen.dev 或直接 HTML + Tailwind CSS。选择 Figma 路线时，Codex 先检查 Figma 工具，缺失时提示安装相应插件；没有 Figma 但想手动修改时推荐 pen.dev 客户端。可编辑稿是可选分支，不阻断已授权的代码交付。
+6. **验证并完成请求。** 对实际改动做相称的浏览器和功能检查。要求上线的任务核对发布目标，按已有授权发布，再检查真实生产页面；预览或构建成功不能单独证明上线完成。
 
-8. Prioritize opportunities and produce the deliverable.
-   - Rate each finding by impact, effort, confidence, and risk.
-   - Use the impact x effort matrix: immediate fixes, priority projects, low-cost cleanup, and defer/drop.
-   - Assign likely owner: UI/design, operations, marketing/BM, product, development, user operations, or analytics.
-   - Tie every recommendation to a user job or business lever: reduce choice friction, clarify value, increase trust, improve discoverability, improve speed, reduce support burden, or make measurement cleaner.
-   - Identify claim guardrails: phrases that must be verified, softened, removed, or backed by source links.
-   - Use `references/report-template.md` when the user wants a client-ready report.
-   - Use `references/audit-checklist.md` when the user wants a checklist, scorecard, or repeatable QA pass.
-   - Use `references/report-template-zh.md` for a Chinese client-ready report.
-   - Use `references/audit-checklist-zh.md` for a Chinese checklist, scorecard, or repeatable QA pass.
-   - Use `references/quick-audit-zh.md` when the user wants a fast Chinese independent-site review.
-   - Use `references/conversion-methodology-zh.md` when the task needs a complete 8-stage diagnostic SOP, analytics/event checks, traffic-quality diagnosis, funnel-stage baselines, cross-market design audit, user feedback, competitor monitoring, collaboration rhythm, or execution cadence.
-   - Include quick wins, deeper redesign ideas, verification steps, and unresolved questions.
-   - Keep recommendations implementable: name the section/page, proposed change, rationale, evidence, and expected measurement.
+每个实际大节点留一份简短报告或清晰的报告章节：做了什么、发现什么、建议什么、证据在哪里、还有什么没确认。不为未执行的节点生成空报告，不把报告自动变成审批点。
 
-9. Verify implementation or redesign work.
-   - For local HTML/CSS/JS deliverables, run or adapt `scripts/static_site_audit.py`.
-   - Add task-specific checks for required sections, allowed claims, SKU coverage, PDP links, image alt text, JSON-LD parsing, mobile breakpoints, sticky CTAs, and analytics events.
-   - For live pages, verify important URLs and remote assets return successful statuses.
-   - Do browser QA at desktop and mobile sizes when layout, interaction, or visual hierarchy is part of the work.
+## 证据和完成标准
 
-## Output Standards
+- 区分已复现缺陷、数据支持的体验风险、待验证增长假设；渠道差异或高跳出只能提示调查方向，不能单独证明视觉原因。
+- 每个主要建议写清页面与状态、事实/截图、具体改动及检查方法。商品、价格、优惠、评价、物流和保障以可核验来源为准，不补造商业承诺。
+- 静态检查、浏览器操作、线上验证、分析平台接收事件、转化效果是不同结果。分别写通过、失败、未执行或不适用，说明证据与限制。
+- 本地脚本 [static_site_audit.py](scripts/static_site_audit.py) 仅辅助静态检查；根据实际输出解释覆盖范围。不能替代布局、可访问性、购物车、支付或数据接收验证。
+- 交付原型时标明模拟部分；上线时记录目标版本、关键路径结果、未完成项与恢复方式。没有后续效果数据时只说完成了什么，不能宣称已经提升转化。
+- 只使用当前任务所需的数据；报告与公开交付去除账户凭据、客户明细、本机身份信息和私有链接。公开案例使用公开来源，用户材料按其指定范围保存。
 
-Every audit should include:
+## 按需参考
 
-- Executive diagnosis: the main conversion problem in 2-4 sentences.
-- 中文执行摘要：用 2-4 句话说清楚最大的转化阻力和最值得先改的位置。
-- Data reliability note: whether tracking and funnel data are trustworthy.
-- Traffic quality diagnosis: whether the visitor intent matches the landing experience.
-- Market and landing-page fit: whether design rhythm, promotion density, and benefit expression match the target market/channel.
-- Evidence table: page/element, observation, impact, confidence, source.
-- Prioritized recommendations: impact, effort, owner or discipline, suggested metric, and next validation method.
-- Claim and compliance guardrails: unsupported or risky language to avoid.
-- Verification checklist: what to test before publishing.
-
-When producing implementation acceptance notes, mirror this structure:
-
-- Growth design strategy.
-- Implemented conversion levers.
-- Claim and SKU guardrails.
-- Acceptance checks run.
-- Files or pages touched.
-
-## Resource Use
-
-- Read `references/audit-checklist.md` for category-by-category inspection criteria.
-- Read `references/report-template.md` when writing a structured report.
-- Read `references/audit-checklist-zh.md` when the user wants Chinese deliverables or asks for 独立站检测/网站分析 in Chinese.
-- Read `references/report-template-zh.md` when writing a Chinese structured report.
-- Read `references/quick-audit-zh.md` when the user wants to quickly review a site with limited data.
-- Read `references/conversion-methodology-zh.md` when the task needs a complete 8-stage diagnostic SOP, analytics/event checks, traffic-quality diagnosis, funnel-stage baselines, cross-market design fit, feedback systems, competitor monitoring, or execution rhythm.
-- Use `scripts/static_site_audit.py` for local static checks, then add project-specific assertions instead of relying on the generic script alone.
+- 快速或无后台审核：[中文快速审核](references/quick-audit-zh.md)。
+- 深入查找问题：[中文检查表](references/audit-checklist-zh.md) / [English checklist](references/audit-checklist.md)。
+- 报告排版：[中文报告模板](references/report-template-zh.md) / [English report template](references/report-template.md)。
+- 有数据的漏斗、流量与跨市场诊断：[转化诊断方法](references/conversion-methodology-zh.md)。
+- 完整执行、资料与 PRD、验收和发布：[执行流程](references/workflow-execution.md)。
+- 原型、HeroUI、Figma 与 pen.dev：[设计与交付](references/design-and-delivery.md)。
+- 选择和记录真实跨品类案例：[公开标杆池](references/benchmarks.md)。
