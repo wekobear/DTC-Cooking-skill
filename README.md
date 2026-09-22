@@ -1,22 +1,22 @@
-# DTC Cooking（DTC 烹饪）
+# DTC-Cooking（DTC 烹饪）
 
-**当前版本：0.3.0** · [下载 Skill](https://github.com/wekobear/DTC-Cooking-skill/releases/download/v0.3.0/independent-site-audit-0.3.0.zip) · [版本说明](CHANGELOG.md)
+**当前版本：0.3.1** · [下载 Skill](https://github.com/wekobear/DTC-Cooking-skill/releases/download/v0.3.1/DTC-Cooking-0.3.1.zip) · [版本说明](CHANGELOG.md)
 
-帮助 DTC 独立站找出页面哪里让顾客看不懂、选不定、买不顺，再给出有依据、能实施的改进方案。用户说清目标后，可以从界面检查继续做到页面制作、验证和已授权的上线。
+DTC-Cooking 像顶尖厨师拆解烹饪技术一样，拆解 DTC 独立站的问题：从准备食材、处理食材，到控火、调味、摆盘、上桌品尝，把每一步为什么做、怎样做、怎样判断做好了讲清楚。这里的“食材”是你的网站、目标和已有资料，最终要端上桌的是有依据、能实施的页面改进，让顾客更容易看懂商品、做出选择、完成购买。
 
 这是给 AI Agent 使用的工作流程，执行需要当前环境提供浏览器、代码或站点编辑能力；发布还需要正确的目标和账号权限。它不承诺自动提高转化率，也不要求每个用户都连接同一套工具。
 
 ## 一句话开始
 
 ```text
-Use $independent-site-audit 检查 https://example.com 的商品页，说明最值得改的问题和方案。
+Use $DTC-Cooking 检查 https://example.com 的商品页，说明最值得改的问题和方案。
 ```
 
 也可以指定交付终点：
 
 ```text
-Use $independent-site-audit 根据这个商品页和我提供的 PDF 报告，做出可操作的改版预览。
-Use $independent-site-audit 检查并修改这个页面，验证后发布到项目已配置的网站，给我前后对比和线上检查结果。
+Use $DTC-Cooking 根据这个商品页和我提供的 PDF 报告，做出可操作的改版预览。
+Use $DTC-Cooking 检查并修改这个页面，验证后发布到项目已配置的网站，给我前后对比和线上检查结果。
 ```
 
 只要求检测，就交付问题和方案；要求预览，就制作并验证页面；明确要求上线且条件具备，就继续完成发布与线上核验。普通阶段报告不会变成重复审批。
@@ -31,19 +31,22 @@ Use $independent-site-audit 检查并修改这个页面，验证后发布到项�
 
 没有数据时也给出具体方案，但不把推测写成真实流失原因。后续是否提升转化，需要实施后的证据。
 
-## 从发现问题到交付页面
+## 六道工序，把问题变成能落地的改法
 
-![DTC Cooking 完整流程](docs/assets/workflow.png)
+![DTC-Cooking 完整流程](docs/assets/workflow.png)
 
 [白话流程说明](docs/workflow.md) · [交互流程图 HTML](docs/workflow.html)（下载后用浏览器打开）
 
-1. 读取网站、目标与已有工具，补问尚缺的数据和是否开启多智能体。
-2. 整理资料，检查实际界面，按问题选择标杆并保存真实截图。
-3. 写“页面改进说明书”（PRD）：哪里有问题、凭什么这样判断、怎么改、如何检查。
-4. 按 [Vibe Designing Playbook](https://alibaba-cloud-design.github.io/vibe-designing-playbook/) 的设计方法，结合 [HeroUI](https://heroui.com/docs/react/getting-started) 制作原型，沿用目标站的品牌与业务规则。
-5. 验证手机和电脑上的实际操作，再按用户要求交付或上线。
+| 烹饪工序 | 在独立站里做什么 | 交付什么 |
+| --- | --- | --- |
+| **准备食材** | 看清网站、购买目标和本次终点，确认可用后台或现成资料；都没有就走页面与标杆对照路线 | 任务与资料说明 |
+| **处理食材** | 辨别资料是否可靠，实际走一遍手机和电脑上的购买过程，对照相关标杆 | 问题清单、资料依据和真实截图 |
+| **控火** | 决定先解决什么、这次改到哪里，把投入放在最值得改的问题上 | 页面改进说明书（PRD）：问题、理由、改法和检查方法 |
+| **调味** | 按 [Vibe Designing Playbook](https://alibaba-cloud-design.github.io/vibe-designing-playbook/) 安排信息、视觉和交互，用 [HeroUI](https://heroui.com/docs/react/getting-started) 的组件思路细化方案 | 页面设计与组件说明 |
+| **摆盘** | 做成可操作的网页，选择 Figma、pen.dev 或 HTML + Tailwind CSS 交付，检查手机和电脑上的实际操作 | 可运行预览、代码或可编辑稿、检查结果 |
+| **上桌品尝** | 按用户授权发布并检查真实线上页面，再用后续资料判断顾客是否更容易选购和下单 | 线上检查与恢复说明；有后续数据时给出效果判断 |
 
-每个实际执行的大阶段留下简短报告，问题、证据、改动与验证可以对应起来。开启多智能体时按独立工作分工；关闭时由单个 Agent 完成。
+厨师会按菜品安排工序，DTC-Cooking 也按你的需求推进：只要检测与方案，就做到问题分析和改进说明；局部小修直接处理相关部分，不强迫六步全跑。每个实际执行的大阶段留下简短报告，问题、证据、改动与验证可以对应起来。启动时询问是否开启多智能体；开启后按独立工作分工，关闭时由单个 Agent 完成。
 
 ## 怎样继续修改
 
@@ -55,14 +58,14 @@ HeroUI、Figma 和分析工具的安装状态不会从作者电脑继承。Skill
 
 ## 安装
 
-下载并解压 [0.3.0 Skill 包](https://github.com/wekobear/DTC-Cooking-skill/releases/download/v0.3.0/independent-site-audit-0.3.0.zip)，将其中的 `independent-site-audit/` 放入工具支持的 Skill 目录，即可通过 `$independent-site-audit` 调用。已有中央 Skill 管理器时沿用其目录与软链接规则，不创建重复副本。
+下载并解压 [0.3.1 Skill 包](https://github.com/wekobear/DTC-Cooking-skill/releases/download/v0.3.1/DTC-Cooking-0.3.1.zip)，将其中的 `DTC-Cooking/` 放入工具支持的 Skill 目录，即可通过 `$DTC-Cooking` 调用。已有中央 Skill 管理器时沿用其目录与软链接规则，不创建重复副本。
 
-仓库中的 `independent-site-audit/` 是可安装目录；`docs/` 是流程说明和图，`independent-site-audit/tests/` 是静态检查脚本的验证用例。
+仓库中的 `DTC-Cooking/` 是可安装目录；`docs/` 是流程说明和图，`DTC-Cooking/tests/` 是静态检查脚本的验证用例。
 
 ## 本地静态检查
 
 ```bash
-python3 independent-site-audit/scripts/static_site_audit.py index.html \
+python3 DTC-Cooking/scripts/static_site_audit.py index.html \
   --css styles.css --js script.js --required-id main \
   --require-tracking --require-mobile-css
 ```

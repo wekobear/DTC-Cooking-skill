@@ -2,7 +2,7 @@
   "schema_version": 2,
   "diagram_type": "workflow",
   "meta": {
-    "title": "DTC Cooking · 从看出问题到改好页面",
+    "title": "DTC-Cooking · 像顶尖厨师一样拆解页面问题",
     "locale": "zh-CN",
     "quality_profile": "showcase",
     "legend": {
@@ -30,20 +30,20 @@
   "phases": [
     {
       "id": "prepare",
-      "label": "01 准备能提供的资料",
+      "label": "准备食材",
       "fromCol": 0,
       "toCol": 1
     },
     {
       "id": "diagnose",
-      "label": "02 找问题，讲清怎么改",
+      "label": "处理食材 · 控火 · 调味",
       "fromCol": 2,
       "toCol": 3,
       "variant": "emphasis"
     },
     {
       "id": "build",
-      "label": "03 做出能看到的页面",
+      "label": "摆盘 · 上桌品尝",
       "fromCol": 4,
       "toCol": 5
     }
@@ -64,8 +64,8 @@
       "lane": "main",
       "col": 0,
       "type": "external",
-      "label": "发来网站与目标",
-      "sublabel": "想改善哪里？",
+      "label": "准备食材",
+      "sublabel": "网站、目标与购买任务",
       "width": 164
     },
     {
@@ -73,7 +73,7 @@
       "lane": "connected",
       "col": 1,
       "type": "database",
-      "label": "读取后台数据",
+      "label": "备好后台数据",
       "sublabel": "PostHog / GA4 / 订单",
       "width": 180
     },
@@ -82,7 +82,7 @@
       "lane": "documents",
       "col": 1,
       "type": "database",
-      "label": "读取现有资料",
+      "label": "备好现成资料",
       "sublabel": "PDF、表格、报告、截图",
       "width": 180
     },
@@ -91,8 +91,8 @@
       "lane": "main",
       "col": 2,
       "type": "backend",
-      "label": "对照网站与标杆",
-      "sublabel": "找出看不懂、不好买的地方",
+      "label": "处理食材 · 找问题",
+      "sublabel": "核对资料，对照页面与标杆",
       "width": 204
     },
     {
@@ -100,8 +100,8 @@
       "lane": "main",
       "col": 3,
       "type": "backend",
-      "label": "说明先改什么",
-      "sublabel": "问题、理由、截图与改法",
+      "label": "控火 · 定先后",
+      "sublabel": "优先级、改法与 PRD",
       "width": 192
     },
     {
@@ -109,7 +109,7 @@
       "lane": "documents",
       "col": 3,
       "type": "frontend",
-      "label": "画出新页面",
+      "label": "调味 · 画方案",
       "sublabel": "Playbook + HeroUI",
       "width": 178
     },
@@ -118,7 +118,7 @@
       "lane": "documents",
       "col": 4,
       "type": "frontend",
-      "label": "选择修改方式",
+      "label": "摆盘 · 做页面",
       "sublabel": "Figma / pen.dev / HTML",
       "width": 190
     },
@@ -127,7 +127,7 @@
       "lane": "delivery",
       "col": 4,
       "type": "backend",
-      "label": "检查页面能否用",
+      "label": "摆盘 · 试操作",
       "sublabel": "手机、按钮与购买步骤",
       "width": 190
     },
@@ -136,7 +136,7 @@
       "lane": "delivery",
       "col": 5,
       "type": "cloud",
-      "label": "按发布要求上线",
+      "label": "上桌 · 按要求发布",
       "sublabel": "核对线上页面和改动",
       "width": 178
     },
@@ -145,7 +145,7 @@
       "lane": "documents",
       "col": 5,
       "type": "backend",
-      "label": "看改后的表现",
+      "label": "品尝 · 看实际表现",
       "sublabel": "是否更容易选购与下单",
       "width": 192
     }
@@ -232,15 +232,15 @@
   "cards": [
     {
       "dot": "cyan",
-      "title": "开始时问清",
+      "title": "先问口味，再备食材",
       "items": [
-        "先查已有连接，再问缺什么资料",
-        "是否让多个 AI 分工协作"
+        "先查已有资料，缺数据也能开工",
+        "是否让多个 AI 分工掌勺"
       ]
     },
     {
       "dot": "violet",
-      "title": "改稿方式自己选",
+      "title": "摆盘方式自己选",
       "items": [
         "用 Figma；没有就推荐 pen.dev",
         "也可直接拿 HTML 网页交付"
@@ -248,10 +248,10 @@
     },
     {
       "dot": "emerald",
-      "title": "每一步看得见",
+      "title": "每道工序有交代",
       "items": [
-        "留下短报告、截图与方案",
-        "没有数据时，效果先列为待验证"
+        "留下短报告、截图与可执行方案",
+        "好不好吃，要看真实购买表现"
       ]
     }
   ]
