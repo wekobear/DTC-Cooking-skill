@@ -1,6 +1,6 @@
 # DTC-Cooking：像顶尖厨师一样，拆解独立站的问题
 
-> 版本 0.3.1｜这份说明解释 Skill 如何开展工作，不是某个站点已经改版、上线或提升转化的记录。
+> 版本 0.3.2｜这份说明解释 Skill 如何开展工作，不是某个站点已经改版、上线或提升转化的记录。
 
 ![流程图](assets/workflow.png)
 
@@ -8,7 +8,7 @@
 
 顶尖厨师会把一道菜拆成食材、处理方法、火候和味道，DTC-Cooking 则把独立站的问题拆成资料、页面体验、改进顺序和具体做法。我们借六道烹饪工序讲清整个流程，帮助顾客看懂商品、做出选择、顺利下单。每一步都要说明依据并留下能查看的成果。
 
-用户可以这样开始：“使用 $DTC-Cooking 检查这个商品页的手机端体验，给出修改方案，做好页面并上线。”只想找问题，就交付问题与方案；想改页面，就继续制作和验证；明确要求上线且条件具备，就推进到线上检查。小修只处理相关工序，不必从头跑完整流程。
+优先推荐在 Codex 中使用：“使用 $dtc-cooking 检查这个商品页的手机端体验，给出修改方案，做好页面并上线。”Skill 的通用标识是小写 `dtc-cooking`，品牌名仍为 DTC-Cooking；Claude Code、Cursor 等环境按各自入口调用，见 [安装与跨 Agent 调用](../README.md#安装与跨-agent-调用)。只想找问题，就交付问题与方案；想改页面，就继续制作和验证；明确要求上线且条件具备，就推进到线上检查。小修只处理相关工序，不必从头跑完整流程。
 
 ## 1. 准备食材：手上有什么，就从什么开始
 
@@ -66,4 +66,4 @@ pen.dev 支持导入网页、手动修改和导出页面代码，适合调整文
 
 准备食材有任务说明，处理食材有研究和截图，控火有改进说明书，调味有设计说明，摆盘有网页和检查结果，上桌品尝有线上核验。报告可以合并成几个清楚的章节，先回答“做了什么、发现什么、建议什么、还有什么没确认”，配上必要截图和结果链接。不为未执行的步骤生成空报告，也不把报告变成额外审批。
 
-参考：[Vibe Designing Playbook](https://alibaba-cloud-design.github.io/vibe-designing-playbook/)、[HeroUI](https://www.heroui.com/)、[公开标杆研究起点](../DTC-Cooking/references/benchmarks.md)。
+参考：[Vibe Designing Playbook](https://alibaba-cloud-design.github.io/vibe-designing-playbook/)、[HeroUI](https://www.heroui.com/)、[公开标杆研究起点](../dtc-cooking/references/benchmarks.md)。

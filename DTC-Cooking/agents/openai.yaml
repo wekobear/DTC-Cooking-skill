@@ -1,4 +1,0 @@
-interface:
-  display_name: "DTC-Cooking"
-  short_description: "像厨师拆解烹饪技术一样拆解独立站问题，从备料、控火到上桌，给出能落地的页面改法"
-  default_prompt: "使用 $DTC-Cooking 检查这个独立站，像顶尖厨师讲清做菜步骤一样，结合可用资料和相关标杆说明问题与改法，并按我要求的范围推进到方案、预览或上线。"
